@@ -10,11 +10,19 @@ import shutil
 import zipfile
 import base64
 
+# Function to download the model file from Google Drive
+def download_model():
+    model_url = "https://drive.google.com/file/d/1sxfzLPlKQbBdPjhwqC3I0NkqO6T69eK8/view?usp=drive_link"
+    response = requests.get(model_url)
+    with open("mini_project.h5", "wb") as f:
+        f.write(response.content)
+
 # Function to load the model
 @st.cache(allow_output_mutation=True)
 def load_model():
+    download_model()  # Download the model file from Google Drive
     return tf.keras.models.load_model('mini_project.h5')
-
+    
 # Function to make predictions on the input images
 def classify_image(image, model):
     image = np.array(image.resize((224, 224)))  # Resize the image to match your model's input shape
