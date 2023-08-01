@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 import zipfile
 import base64
+import requests
 
 # Function to download the model file from Google Drive
 def download_model():
